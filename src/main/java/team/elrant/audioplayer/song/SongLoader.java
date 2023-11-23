@@ -9,14 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
 public class SongLoader {
     public ArrayList<Song> songs = new ArrayList<>();
     private final String folderPath;
     public SongLoader(String folderPath) {
         this.folderPath = folderPath;
     }
-    public void loadSongs() throws IOException {
+    public void loadSongs() throws IOException, LineUnavailableException {
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(folderPath))) {
             for (Path path : stream) {
                 if (!Files.isDirectory(path)) {
@@ -36,6 +35,9 @@ public class SongLoader {
                 }
             }
         }
-        songs.get(0).play();
+        for (Song song : songs) {
+            System.out.println("Song #" + songs.indexOf(song) + ": " + song.filePath);
+            System.out.println(song.status);
+        }
     }
 }

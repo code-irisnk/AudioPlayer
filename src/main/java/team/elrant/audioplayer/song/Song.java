@@ -17,22 +17,17 @@ public class Song {
     public Song(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         this.filePath = filePath;
         // create AudioInputStream object
-        audioInputStream =
+        this.audioInputStream =
                 AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
         // create clip reference
-        clip = AudioSystem.getClip();
-
-        // open audioInputStream to the clip
-        clip.open(audioInputStream);
-
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        this.clip = AudioSystem.getClip();
     }
 
 
     // Method to play the audio
-    public void play()
-    {
+    public void play() throws LineUnavailableException, IOException {
+        clip.open(audioInputStream);
         //start the clip
         clip.start();
 
