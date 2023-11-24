@@ -9,10 +9,10 @@ public class Song {
     Clip clip;
 
     // current status of clip
-    String status;
+    String status = "paused";
 
     AudioInputStream audioInputStream;
-    String filePath;
+    public String filePath;
 
     public Song(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         this.filePath = filePath;
@@ -28,7 +28,6 @@ public class Song {
     // Method to play the audio
     public void play() throws LineUnavailableException, IOException {
         clip.open(audioInputStream);
-        //start the clip
         clip.start();
 
         status = "playing";
@@ -58,8 +57,8 @@ public class Song {
                     "being played");
             return;
         }
-        clip.close();
         resetAudioStream();
+
         clip.setMicrosecondPosition(currentFrame);
         this.play();
     }
@@ -68,8 +67,7 @@ public class Song {
     public void restart() throws IOException, LineUnavailableException,
             UnsupportedAudioFileException
     {
-        clip.stop();
-        clip.close();
+        this.pause();
         resetAudioStream();
         currentFrame = 0L;
         clip.setMicrosecondPosition(0);
@@ -77,12 +75,12 @@ public class Song {
     }
 
     // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
+    public void stop()
     {
         currentFrame = 0L;
         clip.stop();
         clip.close();
+        status = "stopped";
     }
 
     // Method to jump to a specific part
@@ -94,20 +92,20 @@ public class Song {
             clip.stop();
             clip.close();
             resetAudioStream();
+            clip.open(audioInputStream);
             currentFrame = c;
             clip.setMicrosecondPosition(c);
             this.play();
+            status = "playing";
         }
     }
 
     // Method to reset audio stream
-    public void resetAudioStream() throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException
+    public void resetAudioStream() throws UnsupportedAudioFileException, IOException
     {
         audioInputStream = AudioSystem.getAudioInputStream(
                 new File(filePath).getAbsoluteFile());
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        status = "stopped";
     }
 
 }

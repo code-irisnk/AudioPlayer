@@ -4,6 +4,9 @@ module team.elrant.audioplayer {
     requires java.desktop;
     requires org.apache.tika.core;
 
-    opens team.elrant.audioplayer to javafx.fxml;
-    exports team.elrant.audioplayer;
+    exports team.elrant.audioplayer.controllers;
+    opens team.elrant.audioplayer.controllers to javafx.fxml;
+    exports team.elrant.audioplayer.views;
+    opens team.elrant.audioplayer.views to javafx.fxml;
+    exports team.elrant.audioplayer.song;
 }

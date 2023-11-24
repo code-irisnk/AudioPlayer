@@ -15,7 +15,7 @@ public class SongLoader {
     public SongLoader(String folderPath) {
         this.folderPath = folderPath;
     }
-    public void loadSongs() throws IOException, LineUnavailableException {
+    public void loadSongs() {
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(folderPath))) {
             for (Path path : stream) {
                 if (!Files.isDirectory(path)) {
@@ -34,6 +34,8 @@ public class SongLoader {
                     }
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         for (Song song : songs) {
             System.out.println("Song #" + songs.indexOf(song) + ": " + song.filePath);
