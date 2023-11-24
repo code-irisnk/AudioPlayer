@@ -16,7 +16,7 @@
          <Font name="Arial" size="12.0" />
       </font>
    </Text>
-   <TextField promptText="Folder\Music" fx:id="pathField">
+   <TextField promptText="Folder\Music" fx:id="pathField" onAction="#onPathFieldEnter">
       <font>
          <Font name="Arial" size="12.0" />
       </font>

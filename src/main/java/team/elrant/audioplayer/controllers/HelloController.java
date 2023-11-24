@@ -11,6 +11,14 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
+        switchView();
+    }
+    @FXML
+    protected void onPathFieldEnter() {
+        switchView();
+    }
+
+    protected void switchView() {
         String textValue = pathField.getText();
         System.out.println("Text entered: " + textValue);
         try {
@@ -21,7 +29,5 @@ public class HelloController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }

@@ -5,7 +5,6 @@ import team.elrant.audioplayer.song.SongLoader;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 public class ButtonView extends JFrame {
     public ButtonView(SongLoader songLoader) {
         setTitle("Applicazione Grafica");

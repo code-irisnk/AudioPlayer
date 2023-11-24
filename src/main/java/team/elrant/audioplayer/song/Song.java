@@ -29,7 +29,6 @@ public class Song {
     public void play() throws LineUnavailableException, IOException {
         clip.open(audioInputStream);
         clip.start();
-
         status = "playing";
     }
 
